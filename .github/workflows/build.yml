@@ -1,13 +1,9 @@
 name: Build Code
 
-defaults: 
-  run:
-    working-directory: python-build-test/pipeline
-
 on:
   push:
     branches:
-      - main  # Added space before 'main'
+      - main  
 
 jobs:
   run-script:
