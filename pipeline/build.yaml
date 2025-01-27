@@ -1,5 +1,10 @@
 name: Run Shell Script
 
+defaults: 
+   run:
+      working-directory:
+         python-build-test/pipeline
+
 on:
   push:
       branches:
