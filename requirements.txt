@@ -2,5 +2,3 @@ pybuilder
 setuptools
 pyspark
 pytest
-Pandas >= 1.0.5
-PyArrow >= 4.0.0
