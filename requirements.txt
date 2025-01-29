@@ -2,3 +2,4 @@ pybuilder
 setuptools
 pyspark
 pytest
+Pandas >= 1.0.5
