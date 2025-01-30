@@ -25,3 +25,9 @@ jobs:
           python -m pip install -r requirements.txt
           echo "Installed all Packages"
           pyb
+          
+      - name: Upload PySpark output
+        uses: actions/upload-artifact@v2
+        with:
+          name: pyspark-output
+          path: output/   
