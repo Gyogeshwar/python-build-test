@@ -30,9 +30,6 @@ def main():
     spark = create_spark_session()
     df1, df2 = create_data_frames(spark)
     
-    # Compare DataFrames
-    compare_dataframes_publish(df1, df2)
-    
     # Ensure output directories exist
     os.makedirs("/home/runner/work/python-build-test/result/expected", exist_ok=True)
     os.makedirs("/home/runner/work/python-build-test/result/output", exist_ok=True)
@@ -40,6 +37,9 @@ def main():
     # Write DataFrames to CSV
     df1.write.csv("/home/runner/work/python-build-test/result/expected/df1.csv", header=True)
     df2.write.csv("/home/runner/work/python-build-test/result/output/df2.csv", header=True)
+
+    # Compare DataFrames
+    compare_dataframes_publish(df1, df2)
 
 if __name__ == "__main__":
     main()
