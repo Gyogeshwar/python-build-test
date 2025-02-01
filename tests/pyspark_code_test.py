@@ -34,12 +34,12 @@ def main():
     compare_dataframes_publish(df1, df2)
     
     # Ensure output directories exist
-    os.makedirs("result/expected", exist_ok=True)
-    os.makedirs("result/output", exist_ok=True)
+    os.makedirs("/home/runner/work/python-build-test/result/expected", exist_ok=True)
+    os.makedirs("/home/runner/work/python-build-test/result/output", exist_ok=True)
     
     # Write DataFrames to CSV
-    df1.write.csv("result/expected/df1.csv", header=True)
-    df2.write.csv("result/output/df2.csv", header=True)
+    df1.write.csv("/home/runner/work/python-build-test/result/expected/df1.csv", header=True)
+    df2.write.csv("/home/runner/work/python-build-test/result/output/df2.csv", header=True)
 
 if __name__ == "__main__":
     main()
