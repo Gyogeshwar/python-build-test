@@ -30,13 +30,15 @@ def main():
     spark = create_spark_session()
     df1, df2 = create_data_frames(spark)
     
+    workspace = os.environ.get("GITHUB_WORKSPACE", "/home/runner/work/python-build-test")
+
     # Ensure output directories exist
-    os.makedirs("/home/runner/work/python-build-test/result/expected", exist_ok=True)
-    os.makedirs("/home/runner/work/python-build-test/result/output", exist_ok=True)
+    os.makedirs(os.path.join(workspace, "result/expected"), exist_ok=True)
+    os.makedirs(os.path.join(workspace, "result/output"), exist_ok=True)
     
     # Write DataFrames to CSV
-    df1.write.csv("/home/runner/work/python-build-test/result/expected/df1.csv", header=True)
-    df2.write.csv("/home/runner/work/python-build-test/result/output/df2.csv", header=True)
+    df1.write.csv(os.path.join(workspace, "result/expected/df1.csv"), header=True)
+    df2.write.csv(os.path.join(workspace, "result/output/df2.csv"), header=True)
 
     # Compare DataFrames
     compare_dataframes_publish(df1, df2)
