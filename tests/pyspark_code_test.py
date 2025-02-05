@@ -30,7 +30,7 @@ def main():
     spark = create_spark_session()
     df1, df2 = create_data_frames(spark)
     
-    workspace = os.environ.get("GITHUB_WORKSPACE", "/home/runner/work/python-build-test")
+    workspace = os.environ.get("GITHUB_WORKSPACE", "/home/runner/work/python-build-test/python-build-test/")
 
     # Ensure output directories exist
     os.makedirs(os.path.join(workspace, "result/expected"), exist_ok=True)
