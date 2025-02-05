@@ -27,8 +27,8 @@ def compare_dataframes_publish(df1, df2):
     os.makedirs(os.path.join(workspace, "result/output"), exist_ok=True)
     
     # Write DataFrames to CSV
-    df1.write.csv(os.path.join(workspace, "result/expected/df1.csv"), header=True)
-    df2.write.csv(os.path.join(workspace, "result/output/df2.csv"), header=True)
+    df1.coalesce(1).write.csv(os.path.join(workspace, "result/expected/df1.csv"), header=True)
+    df2.coalesce(1).write.csv(os.path.join(workspace, "result/output/df2.csv"), header=True)
 
 
 def test_compare_dataframes(spark, data_frames):
