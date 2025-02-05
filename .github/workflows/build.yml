@@ -13,24 +13,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Python 3.12
+      - name: Setup Python 3.x
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.x' # Use a stable version like '3.11' if necessary
           
       - name: Run commands
         run: |
           echo "Installing Python Packages"
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          python -m pip install -r requirements.txt || exit 1 # Stop on failure
           echo "Installed all Packages"
-          pyb
+          pyb || exit 1 # Stop on failure
           
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact publist
+          name: artifact_publish 
           path: |
-            /home/runner/work/python-build-test/result/expected/*.csv
-            /home/runner/work/python-build-test/result/output/*.csv 
+            ${GITHUB_WORKSPACE}/result/expected/*.csv
+            ${GITHUB_WORKSPACE}/result/output/*.csv 
           retention-days: 90
