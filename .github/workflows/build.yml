@@ -13,10 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Python 3.x
+      - name: Setup Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x' # Use a stable version like '3.11' if necessary
+          python-version: '3.10'
           
       - name: Run commands
         run: |
