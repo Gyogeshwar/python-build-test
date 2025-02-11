@@ -1,4 +1,7 @@
 # python-build-test
+
+![](https://img.shields.io/badge/build-passing-green)
+
 Created this repository for unit testing of python code created for data transformation.
 
 ## To run the unit test follow the below commands
