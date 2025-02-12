@@ -1,6 +1,6 @@
 # python-build-test
 
-![Status](https://github.com/Gyogeshwar/python-build-test/blob/main/.github/workflows/build.yml/badge.svg)
+![Status](https://github.com/Gyogeshwar/python-build-test/actions/workflows/build.yml/badge.svg)
 
 ![](https://img.shields.io/badge/build-passing-green)
 
