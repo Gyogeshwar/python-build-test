@@ -1,5 +1,7 @@
 # python-build-test
 
+![](https://github.com/Gyogeshwar/python-build-test/blob/main/.github/workflows/build.yml/badge.svg)
+
 ![](https://img.shields.io/badge/build-passing-green)
 
 Created this repository for unit testing of python code created for data transformation.
