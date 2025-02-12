@@ -2,6 +2,7 @@
 
 ![](https://github.com/Gyogeshwar/python-build-test/actions/workflows/build.yml/badge.svg)
 
+![](https://img.shields.io/badge/Made_in-python-blue)
 
 Created this repository for unit testing of python code created for data transformation.
 
