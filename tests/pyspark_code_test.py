@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 import os
 import shutil
+from pathlib import Path
 
 @pytest.fixture(scope="module")
 def spark():
@@ -21,22 +22,34 @@ def data_frames(spark):
     return df1, df2
 
 def compare_dataframes_publish(df1, df2):
-    """Compare two DataFrames."""
+    """Compare two DataFrames and write expected/output CSV folders."""
     assert sorted(df1.collect()) == sorted(df2.collect())
-    workspace = os.environ.get("GITHUB_WORKSPACE", "/home/runner/work/python-build-test/python-build-test/")
 
-    # Ensure output directories exist
-    if os.path.exists(os.path.join(workspace, "result/")):
-        shutil.rmtree(os.path.join(workspace, "result/"))
-        print("The folder has been deleted successfully!")
+    # Prefer CI-provided workspace; fall back to repo root (project folder)
+    ws = os.environ.get("GITHUB_WORKSPACE")
+    if ws:
+        workspace = Path(ws)
     else:
-        print("Can not delete the folder as it doesn't exists")
-        os.makedirs(os.path.join(workspace, "result/expected"), exist_ok=True)
-        os.makedirs(os.path.join(workspace, "result/output"), exist_ok=True)
-    
-    # Write DataFrames to CSV
-    df1.coalesce(1).write.mode("overwrite").csv(os.path.join(workspace, "result/expected/df1.csv"), header=True)
-    df2.coalesce(1).write.mode("overwrite").csv(os.path.join(workspace, "result/output/df2.csv"), header=True)
+        # file is tests/<file>; parent 1 is project root
+        workspace = Path(__file__).resolve().parents[1]
+
+    workspace = workspace.expanduser().resolve()
+
+    result_dir = workspace /"tests" / "result"
+    expected_dir = result_dir / "expected"
+    output_dir = result_dir / "output"
+
+    # Remove previous result folder if any, then recreate directories
+    if result_dir.exists():
+        shutil.rmtree(result_dir)
+        print("Removed existing result directory")
+    result_dir.mkdir(parents=True, exist_ok=True)
+    expected_dir.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Spark writes into directories — use directory paths and cast to str
+    df1.coalesce(1).write.mode("overwrite").csv(str(expected_dir / "df1"), header=True)
+    df2.coalesce(1).write.mode("overwrite").csv(str(output_dir / "df2"), header=True)
 
 
 def test_compare_dataframes(spark, data_frames):
